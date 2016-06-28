@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="TweetName">#262626</color>
+    <color name="TwitterBlue">#1DA1F2</color>
+    <color name="TweetScreenName">#a1a1a1</color>
+</resources>
