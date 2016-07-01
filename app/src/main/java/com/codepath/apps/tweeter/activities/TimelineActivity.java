@@ -35,6 +35,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class TimelineActivity extends AppCompatActivity {
     MyPagerAdapter adapterViewPager;
@@ -99,7 +100,10 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 user = new User(response);
-                Picasso.with(TimelineActivity.this).load(user.getProfile_image_url()).into(ivProfile);
+//                ivProfile.getWidth()
+                Picasso.with(TimelineActivity.this).load(user.getProfile_image_url())
+                        .transform(new RoundedCornersTransformation(ivProfile.getWidth() / 2, 0))
+                        .into(ivProfile);
                 ivProfile.setOnClickListener(toProfile);
                 setFab();
             }

@@ -34,7 +34,9 @@
         android:id="@+id/ivProfile"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"
+        android:scaleType="fitCenter" />
 
 
 </RelativeLayout>
