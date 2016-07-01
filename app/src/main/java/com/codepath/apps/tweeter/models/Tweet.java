@@ -35,7 +35,7 @@ public class Tweet {
 //    protected String quoted_status_id_str;
 //    protected Tweet quoted;
 //    protected int retweet_count;
-//    protected boolean retweeted;
+    protected boolean retweeted;
     protected Tweet retweeted_status;
     protected User user_;
 
@@ -59,6 +59,10 @@ public class Tweet {
         return user_;
     }
 
+    public boolean isRetweeted() {
+        return retweeted;
+    }
+
     public Tweet(JSONObject raw) {
 
 
@@ -73,6 +77,10 @@ public class Tweet {
             id_str = raw.getString("id_str");
             user_ = new User(raw.getJSONObject("user"));
             text = raw.getString("text");
+            str = raw.getString("retweeted");
+
+            if (str.equals("null") || str.equals("false")) retweeted = false;
+            else retweeted = true;
             try {
                 JSONObject retweet = raw.getJSONObject("retweeted_status");
                 if (retweet != null) {
@@ -86,6 +94,13 @@ public class Tweet {
         }
     }
 
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
     //unimplemented fields
     //lang
     //current_user_retweet

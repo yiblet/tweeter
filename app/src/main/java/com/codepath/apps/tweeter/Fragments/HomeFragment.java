@@ -115,6 +115,8 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        srRefresh.setColorSchemeColors(R.color.TwitterBlue, R.color.TwitterBlue, R.color.TwitterBlue);
         populateTimeline();
     }
 

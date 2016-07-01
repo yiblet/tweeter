@@ -12,14 +12,18 @@ import android.widget.TextView;
 
 import com.codepath.apps.tweeter.R;
 import com.codepath.apps.tweeter.TimeFormatter;
+import com.codepath.apps.tweeter.TwitterApplication;
+import com.codepath.apps.tweeter.TwitterClient;
 import com.codepath.apps.tweeter.activities.ComposeActivity;
 import com.codepath.apps.tweeter.activities.ProfileActivity;
 import com.codepath.apps.tweeter.activities.TimelineActivity;
 import com.codepath.apps.tweeter.models.Tweet;
 import com.codepath.apps.tweeter.models.User;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 /**
@@ -34,6 +38,9 @@ public class TweetView extends FrameLayout {
     @BindView(R.id.tvRetweet) TextView tvRetweet;
     @BindView(R.id.tvRetweetSign) TextView tvRetweetSign;
     @BindView(R.id.ibReply) ImageButton ibReply;
+    @BindView(R.id.ibFavorite) ImageButton ibFavorite;
+    @BindView(R.id.ibRetweet) ImageButton ibRetweet;
+    TwitterClient client = TwitterApplication.getRestClient();
     Tweet tweet;
     User user;
     boolean isRetweet;
@@ -66,6 +73,30 @@ public class TweetView extends FrameLayout {
                 .into(ivProfile);
         tvTweetText.setText(this.tweet.getText());
         tvTimeSince.setText(TimeFormatter.getTimeDifference(tweet.getCreated_at()));
+//        setRetweeted(tweet.isRetweeted());
+//        setFavorited(tweet.isFavorited());
+    }
+
+    private void setFavorited(boolean favorited) {
+        tweet.setFavorited(favorited);
+        int i;
+        if (favorited) {
+            i = R.drawable.favorited;
+        } else {
+            i = R.drawable.favorite;
+        }
+        Picasso.with(getContext()).load(i).into(ibFavorite);
+    }
+
+    private void setRetweeted(boolean retweeted) {
+        tweet.setRetweeted(retweeted);
+        int i;
+        if (retweeted) {
+            i = R.drawable.retweeted;
+        } else {
+            i = R.drawable.retweet;
+        }
+        Picasso.with(getContext()).load(i).into(ibRetweet);
     }
 
 
@@ -86,6 +117,7 @@ public class TweetView extends FrameLayout {
 
     private void init() {
         inflate(getContext(), R.layout.view_tweet, this);
+        ButterKnife.bind(this);
         tvName = (TextView) findViewById(R.id.tvName);
         tvScreenName = (TextView) findViewById(R.id.tvScreenName);
         ivProfile = (ImageView) findViewById(R.id.ivProfile);
@@ -109,13 +141,28 @@ public class TweetView extends FrameLayout {
             public void onClick(View view) {
                 Intent i = new Intent((Activity) getContext(), ComposeActivity.class);
                 i.putExtra("user", user);
-                i.putExtra("retweet", user.getScreen_name());
+                i.putExtra("reply", tweet.getId_str());
                 ((Activity) getContext()).startActivityForResult(i, TimelineActivity.RETWEET_REQUEST);
             }
         });
+        ibRetweet.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setRetweeted(!tweet.isRetweeted(), true);
 
-
-
+            }
+        });
 
     }
+    private void setRetweeted(boolean b, boolean b1) {
+        setRetweeted(b);
+        if (b1) {
+            if (b) {
+                client.postRetweet(tweet.getId_str(), new JsonHttpResponseHandler());
+            } else {
+                client.postUnretweet(tweet.getId_str(), new JsonHttpResponseHandler());
+            }
+        }
+    }
+
 }

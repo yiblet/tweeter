@@ -16,6 +16,7 @@ import com.codepath.apps.tweeter.R;
 import com.codepath.apps.tweeter.TwitterApplication;
 import com.codepath.apps.tweeter.TwitterClient;
 import com.codepath.apps.tweeter.models.User;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -30,7 +31,8 @@ public class ComposeActivity extends AppCompatActivity {
 
 
     static int RESULT_OK = 200;
-    boolean isRetweet = false;
+    boolean isReply = false;
+    String in_reply_to_status_id;
     TwitterClient client = TwitterApplication.getRestClient();
 
     User user;
@@ -41,15 +43,16 @@ public class ComposeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compose);
         ButterKnife.bind(this);
 
-        if (getIntent().hasExtra("retweet")) {
-            isRetweet = true;
-            etText.setText("@" + user.getScreen_name() + " ");
-        }
-
         user = (User) getIntent().getParcelableExtra("user");
         if (user != null) {
             Picasso.with(this).load(user.getProfile_image_url())
                 .into(ivProfile);
+        }
+
+        if (getIntent().hasExtra("reply")) {
+            isReply = true;
+            in_reply_to_status_id = getIntent().getStringExtra("reply");
+            etText.setText("@" + user.getScreen_name() + " ");
         }
 
         ivClose.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +90,10 @@ public class ComposeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent();
-                if (isRetweet) {
+                if (isReply) {
                     if (! etText.getText().equals("")) {
                         setResult(RESULT_OK, i);
+                        client.postReply(etText.getText().toString(), in_reply_to_status_id, new JsonHttpResponseHandler());
                     } else {
                         setResult(RESULT_CANCELED);
                     }

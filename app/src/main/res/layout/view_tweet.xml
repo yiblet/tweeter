@@ -100,15 +100,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ibReply"
-                android:src="@drawable/reply"
-                android:background="@android:color/transparent"
-                android:layout_below="@+id/tvTimeSince"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
         <TextView
@@ -124,10 +115,51 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:scaleType="fitStart"
+            android:id="@+id/ibReply"
+            android:src="@drawable/reply"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="84dp"
+            android:layout_marginStart="84dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:scaleType="fitStart"
+            android:id="@+id/ibRetweet"
+            android:src="@drawable/retweet"
+            android:background="@android:color/transparent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:scaleType="fitStart"
+            android:id="@+id/ibFavorite"
+            android:src="@drawable/favorite"
+            android:background="@android:color/transparent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="67dp"
+            android:layout_marginEnd="67dp" />
+    </RelativeLayout>
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/TwitterGrey"
+        android:layout_height="2dp"
+        android:background="@color/TwitterLighterGrey"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal" />
 

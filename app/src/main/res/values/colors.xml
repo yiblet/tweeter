@@ -9,4 +9,5 @@
     <color name="TwitterWhite">#FFF</color>
     <color name="TweetScreenName">@color/TwitterGrey</color>
     <color name="background">@color/TwitterWhite</color>
+
 </resources>
