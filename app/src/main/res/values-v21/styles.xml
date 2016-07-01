@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -6,15 +7,10 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="android:colorBackground">@color/TwitterWhite</item>
         <item name="colorAccent">@color/TwitterBlue</item>
         <item name="colorPrimaryDark">@color/TwitterGrey</item>
         <item name="colorPrimary">@color/TwitterWhite</item>
+        <item name="android:navigationBarColor">@color/TwitterBlue</item>
+        <item name="android:statusBarColor">@color/TwitterBlack</item>
     </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
 </resources>

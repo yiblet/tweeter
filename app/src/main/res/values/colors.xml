@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="TweetName">@color/TwitterBlack</color>
+    <color name="TwitterBlue">#50abf1</color>
+    <color name="TwitterBlack">#292f33</color>
+    <color name="TwitterGrey">#667580</color>
+    <color name="TwitterLightGrey">#CCD6DD</color>
+    <color name="TwitterLighterGrey">#E1E8ED</color>
+    <color name="TwitterWhite">#FFF</color>
+    <color name="TweetScreenName">@color/TwitterGrey</color>
+    <color name="background">@color/TwitterWhite</color>
+</resources>

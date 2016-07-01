@@ -20,14 +20,23 @@ public class Tweet {
     }
 
     protected String text;
-//    protected String in_reply_to_screen_name;
+
+    public Tweet getRetweeted_status() {
+        return retweeted_status;
+    }
+
+    public boolean isRetweet() {
+        return retweeted_status != null;
+    }
+
+    //    protected String in_reply_to_screen_name;
 //    protected String in_reply_to_status_id_str;
 //    protected String in_reply_to_user_id_str;
 //    protected String quoted_status_id_str;
 //    protected Tweet quoted;
 //    protected int retweet_count;
 //    protected boolean retweeted;
-//    protected Tweet retweeted_status;
+    protected Tweet retweeted_status;
     protected User user_;
 
     public String getCreated_at() {
@@ -52,6 +61,7 @@ public class Tweet {
 
     public Tweet(JSONObject raw) {
 
+
         try {
             created_at = raw.getString("created_at");
             if (raw.getString("favorite_count").equals("null")) {
@@ -63,9 +73,16 @@ public class Tweet {
             id_str = raw.getString("id_str");
             user_ = new User(raw.getJSONObject("user"));
             text = raw.getString("text");
+            try {
+                JSONObject retweet = raw.getJSONObject("retweeted_status");
+                if (retweet != null) {
+                    retweeted_status = new Tweet(retweet);
+                }
+            } catch (JSONException e) {
+
+            }
         } catch (JSONException e) {
             e.printStackTrace();
-
         }
     }
 

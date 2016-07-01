@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/TwitterWhite"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.codepath.apps.tweeter.activities.ProfileActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="16sp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/ivProfile"
+                            android:layout_marginLeft="29dp"
+                            android:layout_marginStart="29dp"
+                            android:layout_marginTop="29dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:src="@color/TwitterBlue" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Name"
+                            android:textSize="18sp"
+                            android:layout_marginLeft="15dp"
+                            android:id="@+id/tvName"
+                            android:textColor="@color/TweetName"
+                            android:layout_marginTop="18dp"
+                            android:layout_below="@+id/ivProfile"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="\@ScreenName"
+                            android:textSize="14sp"
+                            android:id="@+id/tvScreenName"
+                            android:textColor="@color/TweetScreenName"
+                            android:layout_below="@+id/tvName"
+                            android:layout_alignLeft="@+id/tvName"
+                            android:layout_alignStart="@+id/tvName" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Blurb blah blah blah blah hehe"
+                            android:id="@+id/tvDescription"
+                            android:layout_below="@+id/tvScreenName"
+                            android:layout_alignLeft="@+id/tvScreenName"
+                            android:layout_alignStart="@+id/tvScreenName"
+                            android:layout_marginTop="25dp"
+                            android:textColor="@color/TweetName" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="100"
+                            android:id="@+id/tvFollowing"
+                            android:layout_marginTop="18dp"
+                            android:layout_below="@+id/tvDescription"
+                            android:layout_alignLeft="@+id/tvDescription"
+                            android:layout_alignStart="@+id/tvDescription"
+                            android:textColor="@color/TweetName"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="FOLLOWING"
+                            android:gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:id="@+id/tvFollowingText"
+                            android:textColor="@color/TweetScreenName"
+                            android:layout_alignTop="@+id/tvFollowing"
+                            android:layout_toRightOf="@+id/tvFollowing"
+                            android:layout_toEndOf="@+id/tvFollowing"
+                            android:layout_alignBottom="@+id/tvFollowing"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="2m"
+                            android:id="@+id/tvFollowers"
+                            android:textColor="@color/TweetName"
+                            android:textSize="18sp"
+                            android:layout_alignTop="@+id/tvFollowingText"
+                            android:layout_toRightOf="@+id/tvFollowingText"
+                            android:layout_toEndOf="@+id/tvFollowingText"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginStart="32dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="FOLLOWERS"
+                            android:gravity="center"
+                            android:id="@+id/tvFollowersText"
+                            android:textColor="@color/TweetScreenName"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_alignTop="@+id/tvFollowers"
+                            android:layout_toRightOf="@+id/tvFollowers"
+                            android:layout_toEndOf="@+id/tvFollowers"
+                            android:layout_alignBottom="@+id/tvFollowers" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/linearLayout"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/rvTweets"
+                    tools:listitem="@layout/item_tweet" />
+
+            </RelativeLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</RelativeLayout>
