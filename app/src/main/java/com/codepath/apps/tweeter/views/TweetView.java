@@ -36,7 +36,7 @@ public class TweetView extends FrameLayout {
     @BindView(R.id.tvTimeSince) TextView tvTimeSince;
     @BindView(R.id.tvTweetText) TextView tvTweetText;
     @BindView(R.id.tvRetweet) TextView tvRetweet;
-    @BindView(R.id.tvRetweetSign) TextView tvRetweetSign;
+    @BindView(R.id.ivRetweetSign) ImageView ivRetweetSign;
     @BindView(R.id.ibReply) ImageButton ibReply;
     @BindView(R.id.ibFavorite) ImageButton ibFavorite;
     @BindView(R.id.ibRetweet) ImageButton ibRetweet;
@@ -48,18 +48,29 @@ public class TweetView extends FrameLayout {
 
     private void setRetweetVisible() {
         tvRetweet.setVisibility(VISIBLE);
-        tvRetweetSign.setVisibility(VISIBLE);
+        ivRetweetSign.setVisibility(VISIBLE);
     }
 
     private void setTvRetweetGone() {
         tvRetweet.setVisibility(GONE);
-        tvRetweetSign.setVisibility(GONE);
+        ivRetweetSign.setVisibility(GONE);
     }
 
-    public void setTweet(Tweet tweet) {
+    public void setTweet(final Tweet tweet) {
         if (tweet.isRetweet()) {
             setRetweetVisible();
             tvRetweet.setText(tweet.getUser().getName() + " Retweeted");
+            OnClickListener toRetweeterProfile = new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getContext(), ProfileActivity.class);
+                    i.putExtra("user", tweet.getUser());
+                    getContext().startActivity(i);
+                }
+            };
+
+            tvRetweet.setOnClickListener(toRetweeterProfile);
+            ivRetweetSign.setOnClickListener(toRetweeterProfile);
             this.tweet = tweet.getRetweeted_status();
         } else {
             this.tweet = tweet;
@@ -73,8 +84,8 @@ public class TweetView extends FrameLayout {
                 .into(ivProfile);
         tvTweetText.setText(this.tweet.getText());
         tvTimeSince.setText(TimeFormatter.getTimeDifference(tweet.getCreated_at()));
-//        setRetweeted(tweet.isRetweeted());
-//        setFavorited(tweet.isFavorited());
+        setRetweeted(tweet.isRetweeted());
+        setFavorited(tweet.isFavorited());
     }
 
     private void setFavorited(boolean favorited) {
@@ -124,17 +135,21 @@ public class TweetView extends FrameLayout {
         tvTimeSince = (TextView) findViewById(R.id.tvTimeSince);
         tvTweetText = (TextView) findViewById(R.id.tvTweetText);
         tvRetweet = (TextView) findViewById(R.id.tvRetweet);
-        tvRetweetSign = (TextView) findViewById(R.id.tvRetweetSign);
+        ivRetweetSign = (ImageView) findViewById(R.id.ivRetweetSign);
         ibReply = (ImageButton) findViewById(R.id.ibReply);
 
-        ivProfile.setOnClickListener(new OnClickListener() {
+        OnClickListener toProfile = new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), ProfileActivity.class);
                 i.putExtra("user", user);
                 getContext().startActivity(i);
             }
-        });
+        };
+
+        ivProfile.setOnClickListener(toProfile);
+        tvScreenName.setOnClickListener(toProfile);
+        tvName.setOnClickListener(toProfile);
 
         ibReply.setOnClickListener(new OnClickListener() {
             @Override
@@ -153,7 +168,26 @@ public class TweetView extends FrameLayout {
             }
         });
 
+        ibFavorite.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFavorited(!tweet.isFavorited(), true);
+            }
+        });
+
     }
+
+    private void setFavorited(boolean b, boolean b1) {
+        setFavorited(b);
+        if (b1) {
+            if (b) {
+                client.postFavorite(tweet.getId_str(), new JsonHttpResponseHandler());
+            } else {
+                client.postUnfavorite(tweet.getId_str(), new JsonHttpResponseHandler());
+            }
+        }
+    }
+
     private void setRetweeted(boolean b, boolean b1) {
         setRetweeted(b);
         if (b1) {

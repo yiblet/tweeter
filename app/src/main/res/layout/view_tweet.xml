@@ -8,7 +8,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="4dp"
-        android:paddingBottom="4dp">
+        android:paddingBottom="4dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
 
         <ImageView
             android:layout_width="50dp"
@@ -16,30 +18,31 @@
             android:id="@+id/ivProfile"
             android:contentDescription="profile"
             android:src="@color/TwitterBlue"
-            android:layout_below="@+id/tvRetweetSign"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_below="@+id/ivRetweetSign"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:layout_width="15sp"
+            android:layout_height="15sp"
+            android:scaleType="centerInside"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="%"
-            android:visibility="gone"
-            android:id="@+id/tvRetweetSign"
+            android:visibility="visible"
+            android:id="@+id/ivRetweetSign"
             android:layout_alignParentTop="true"
+            android:src="@drawable/retweeted"
             android:layout_alignRight="@+id/ivProfile"
-            android:layout_alignEnd="@+id/ivProfile" />
+            android:layout_alignEnd="@+id/ivProfile"
+            android:layout_alignBottom="@+id/tvRetweet" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivProfile"
+            android:id="@+id/relativeLayout"
+            android:layout_below="@+id/tvRetweet"
             android:layout_toRightOf="@+id/ivProfile"
-            android:layout_toEndOf="@+id/ivProfile"
-            android:id="@+id/relativeLayout">
+            android:layout_toEndOf="@+id/ivProfile">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,10 +76,10 @@
                 android:text="12h"
                 android:textColor="@color/TweetScreenName"
                 android:id="@+id/tvTimeSince"
+                android:textSize="12sp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textSize="12sp" />
+                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,8 +110,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Retweeted by Name"
+            android:textSize="15sp"
             android:id="@+id/tvRetweet"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/relativeLayout"
             android:layout_alignStart="@+id/relativeLayout" />
@@ -150,10 +154,11 @@
             android:src="@drawable/favorite"
             android:background="@android:color/transparent"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="67dp"
-            android:layout_marginEnd="67dp" />
+            android:layout_toRightOf="@+id/ibRetweet"
+            android:layout_toEndOf="@+id/ibRetweet"
+            android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp" />
+
     </RelativeLayout>
 
     <ImageView

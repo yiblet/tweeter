@@ -5,7 +5,7 @@
     <color name="TwitterBlack">#292f33</color>
     <color name="TwitterGrey">#667580</color>
     <color name="TwitterLightGrey">#CCD6DD</color>
-    <color name="TwitterLighterGrey">#E1E8ED</color>
+    <color name="TwitterLighterGrey">#e1e8ed</color>
     <color name="TwitterWhite">#FFF</color>
     <color name="TweetScreenName">@color/TwitterGrey</color>
     <color name="background">@color/TwitterWhite</color>

@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -25,6 +26,7 @@ import com.codepath.apps.tweeter.adapter.TweetsAdapter;
 import com.codepath.apps.tweeter.models.Tweet;
 import com.codepath.apps.tweeter.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -40,6 +42,7 @@ public class TimelineActivity extends AppCompatActivity {
     @BindView(R.id.ptTab) PagerSlidingTabStrip ptTab;
     @BindView(R.id.fab) FloatingActionButton fab;
     TextView title;
+    ImageView ivProfile;
     User user;
     TwitterClient client = TwitterApplication.getRestClient();
 
@@ -79,14 +82,25 @@ public class TimelineActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         title = (TextView) actionBar.getCustomView().findViewById(R.id.tvTitle);
+        ivProfile = (ImageView) actionBar.getCustomView().findViewById(R.id.ivProfile);
         title.setText(adapterViewPager.getPageTitle(0));
 
+        final View.OnClickListener toProfile = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+                i.putExtra("user", user);
+                TimelineActivity.this.startActivity(i);
+            }
+        };
 
         client.getCurrentUser(new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 user = new User(response);
+                Picasso.with(TimelineActivity.this).load(user.getProfile_image_url()).into(ivProfile);
+                ivProfile.setOnClickListener(toProfile);
                 setFab();
             }
         });
