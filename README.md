@@ -50,7 +50,18 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Main Flow
+Users can view home tweets and mentions .
+<img src='https://github.com/yiblet/tweeter/raw/master/gifs/MainFlow.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Profile Flow
+Users can view profiles.
+<img src='https://github.com/yiblet/tweeter/raw/master/gifs/ProfileFlow.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Tweets Flow
+Users can reply to tweets, favorite tweets, compose new tweets, and make retweets. 
+<img src='https://github.com/yiblet/tweeter/raw/master/gifs/TweetFlow.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
